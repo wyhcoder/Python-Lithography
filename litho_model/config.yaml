@@ -1,0 +1,110 @@
+# ==========================================
+# 仿真系统级参数 (Simulation System)
+# ==========================================
+
+PATTERN_NAME : &PATTERN_NAME "工字型"
+system:
+  wavelength_nm: 193.0
+  pixel_size_nm: 4.0      # 默认 4nm 像素尺寸
+
+# ==========================================
+# 掩模版参数 (Mask Information)
+# ==========================================
+mask:
+  image_name: *PATTERN_NAME   # 默认读取 data/patterns 文件夹下的 .bmp 文件
+
+# ==========================================
+# 光学系统参数 (Optical System)
+# ==========================================
+optics:
+  na: 1.35
+  refractive_index: 1.44  # 物镜空间折射率 n
+  aberrations:
+    z4: 0.0               # Zernike 像差项
+
+# ==========================================
+# 光源参数 (Source Properties)
+# ==========================================
+source:
+  type: "annular"         # 类型可选: conventional, annular, dipole, quasar
+  sigma_in: 0.6
+  sigma_out: 0.9
+
+# ==========================================
+# 光刻胶模型参数 (Resist Model)
+# ==========================================
+resist:
+  model: "threshold"      # 模型类型
+  threshold: 0.25        # 阈值：SRAF/MEEF优化建议 0.25; 机器学习优化建议 0.15 非对称0.2
+  alpha: 85
+
+# ==========================================
+# MEEF 参数 (MEEF Optimization)
+# ==========================================
+meef:
+  curve_type: "BS"             # 曲线拟合类型可选: OA, BS, BZ
+  file_name: "工字型_gradient"         # 用于保存结果时的文件名
+  simply_type: "DPS"           # 简化类型可选: DPS, US, CS, OPC
+  val_simply: 0.8        # 简化值，请根据不同的抽稀方式选择不同的阈值（对角通孔建议 5）
+  pattern_name: *PATTERN_NAME      # MEEF 优化的图形名称对角通孔
+  ifOPC: False                 # 主图形控制点是否在目标版图上选取，标准OPC上的控制点是直接在目标版图上选择的，增加这个选项是为了匹配
+  SRAF: False                  # 是否是对初始化宽度的SRAF进行的主图形控制点位置的优化，以降低EPE为目的
+  move_strategy: "bisector"   # 控制点移动策略: bisector(角平分线一维位移) / xy(X/Y解耦合成二维移动)
+
+# ==========================================
+# SRAF 参数 (SRAF Optimization & Parameterization)
+# ==========================================
+sraf:
+  curve_type: "BS"                  # 曲线拟合类型可选: OA, BS, BZ
+  file_name: "matrix_0525"   # 用于保存结果时的文件名
+  pattern_name: *PATTERN_NAME # 目标版图的名称需要与掩模板参数相对应
+  sraf_orders: True      # 是否启用 SRAF 分阶
+  sraf_simply: True     # 是否启用 SRAF 参数化曲线拟合,即对骨架图进行参数化
+  fix_sraf: False         # 是否固定宽度（只优化 SRAF 时设为 False，现在是永久false）
+  epe_cost: True          # 损失函数：是否使用 wepe，因为现在是先优化epe后优化sraf所以这个参数现在用不到
+  pvband_cost: True       # 损失函数：是否使用 pvband
+  # MEEF 优化后主图形控制点 TXT 文件路径 (pvband_cost=True 时必须填写)
+  # 用正斜杠，Windows/macOS 均兼容
+  # meef_opt_cps_path: "outputs/opc/OPC/BS/5_BS_中心对称通孔PE_EPE_PVBANDnew/WEPE最优的控制点坐标.txt"
+  meef_opt_cps_path: "outputs/opc/OPC/BS/5_BS_对角通孔骨架图参数化/WEPE最优的控制点坐标.txt"
+
+# ==========================================
+# MEEF Pipeline (新独立管线, case_meef_pipeline.py 使用)
+# ==========================================
+# 这是和上面 meef/sraf 完全独立的一套管线: 把 LSM 优化后的版图作为输入,
+# 主图形 / SRAF 都用 "控制点 -> B-spline -> MSAA" 统一参数化, 优化变量
+# 仅为主图形 CP. SRAF CP 全程冻结, 仅参与一次性常量渲染.
+meef_pipeline:
+  # 输入与输出
+  pattern_name: "工字型"
+  ls_mask_path: outputs/opc/CTM和levelset图像/Ls_mask/ls_image工字型.txt  #"outputs/opc/CTM和levelset图像/Ls_mask/ls_image工字型.txt" ls_imagematrix_0525_cpupe_epe_pvband无切趾
+  file_name: "pipeline_test_bisector_meef"
+  move_strategy: "bisector"
+
+  # 主图形 CP
+  main_cp_interval: 7            # extract_mask_control_points(k); 实际间隔 = k+1
+  main_symmetry: "none"           # none / left-right / diagonal / center
+
+  # SRAF CP
+  sraf_cp_arclen: 5.0             # 沿轮廓弧长每隔多少像素一个 CP
+  sraf_min_cps: 8                 # 每个 SRAF 块最少 CP 数 (闭合 B-spline 下限)
+  sraf_smoothing: 0.3             # B-spline 平滑系数 (与主图形保持一致)
+  sraf_curve_pts: 200             # 每条 SRAF 曲线离散到多少点送 MSAA
+  sraf_min_area: 50               # 每个 SRAF 块最小面积 (像素个数)
+
+  # 渲染
+  msaa_level: 16                  # AntiAliasRenderer 等级 (4 / 16 / 36 / 64)
+
+  # MEEF 优化器需要的标量
+  curve_type: "BS"                # OA / BS / BZ
+  delta: 0.15                     # 控制点扰动量 (像素)
+  iterations: 100                 # 迭代次数
+
+  # 拆分参数
+  dilate_radius: 2                # 主图形允许区域膨胀半径
+
+  # EP 点 (非通孔图形使用)
+  interval_line: 5
+  interval_corner: 2
+  mid_weight: 4.0
+  other_weight: 1.0

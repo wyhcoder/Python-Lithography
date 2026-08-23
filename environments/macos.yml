@@ -1,0 +1,25 @@
+name: litho
+channels:
+  - conda-forge
+dependencies:
+  # Use Python 3.10 to match the environment in which this project was developed.
+  - python=3.10
+  - pip
+  - numpy
+  - scipy
+  - scikit-fmm
+  - opencv
+  - matplotlib
+  - pandas
+  - openpyxl
+  - tqdm
+  - pillow
+  - scikit-image
+  - pyyaml
+  - psutil
+  - gdstk
+  - ipykernel
+  # PyTorch is used by the automatic-differentiation MEEF scripts.  On Apple
+  # Silicon it can use the MPS backend when available.
+  - pip:
+      - torch

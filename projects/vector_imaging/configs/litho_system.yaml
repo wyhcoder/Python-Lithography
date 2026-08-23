@@ -1,0 +1,32 @@
+system:
+  wavelength_nm: 193.0
+  pixel_size_nm: 4.0
+  mask_size: 257
+  jones_matrix: [1,0]
+
+mask:
+  mask_name: "matrix_0001.bmp"
+  mask_dir: "./target_images"
+  normalize: true
+
+
+pupil:
+  na: 1.35
+  n_image: 1.44
+  defcous_nm: 0.0
+  aberration: {4: 0.05}
+
+source:
+  type: "annular"
+  sigma_in: 0.6
+  sigma_out: 0.9
+  smoothing: 0.0
+  upsample: 10
+
+resist:
+  model: "sigmoid"
+
+  sigmoid: 
+    threshold: 0.25
+    alpha: 85.0
+

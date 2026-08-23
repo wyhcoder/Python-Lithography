@@ -1,0 +1,29 @@
+# Python / Conda
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+
+# IDE 与系统文件
+.DS_Store
+Thumbs.db
+.idea/
+.history/
+.claude/
+.codebuddy/
+
+# 仿真生成物与缓存
+outputs/
+projects/vector_imaging/output/
+*.log
+
+# 第三方前端依赖（若后续加入文档站点）
+node_modules/
+
+# 大型输入数据
+data/debug_dumps/
+data/patterns/target_images/
+data/patterns/target_images_副本/
+projects/vector_imaging/target_images/
