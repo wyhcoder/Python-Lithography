@@ -4,7 +4,7 @@
 
 | 原位置 | 新位置 | 说明 |
 |---|---|---|
-| `case_*.py` | `examples/scalar/` | 标量与 OPC 示例入口 |
+| `case_*.py` | `demo/scalar/` | 标量与 OPC 示例入口 |
 | `Vector_Image_code/` | `projects/vector_imaging/` | 独立矢量子项目 |
 | `pattern_data/` | `data/patterns/` | 输入版图 |
 | `TXT_test/` | `data/debug_dumps/scalar_text/TXT_test/` | 历史数值转储 |

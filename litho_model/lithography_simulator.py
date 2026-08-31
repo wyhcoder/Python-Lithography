@@ -46,17 +46,17 @@ class LithographySimulator:
         
         
         # 4. SRAF: 亚分辨率辅助图形, 含骨架/控制点/分阶等配置, 供 SRAF_Optimizer 使用
-        # self.sraf = SRAF(target_mask=self.mask.data,
-        #                  curve_type=self.params.sraf.curve_type,
-        #                  pattern_name=self.params.sraf.pattern_name,
-        #                  file_name=self.params.sraf.file_name,
-        #                  sraf_orders=self.params.sraf.sraf_orders,
-        #                  fix_sraf=self.params.sraf.fix_sraf,
-        #                  epe_cost=self.params.sraf.epe_cost,
-        #                  pvband_cost=self.params.sraf.pvband_cost,
-        #                  sraf_simplify=self.params.sraf.sraf_simply,
-        #                  meef_opt_cps_path=self.params.sraf.meef_opt_cps_path)
-        # print("SRAF component created.")
+        self.sraf = SRAF(target_mask=self.mask.data,
+                         curve_type=self.params.sraf.curve_type,
+                         pattern_name=self.params.sraf.pattern_name,
+                         file_name=self.params.sraf.file_name,
+                         sraf_orders=self.params.sraf.sraf_orders,
+                         fix_sraf=self.params.sraf.fix_sraf,
+                         epe_cost=self.params.sraf.epe_cost,
+                         pvband_cost=self.params.sraf.pvband_cost,
+                         sraf_simplify=self.params.sraf.sraf_simply,
+                         meef_opt_cps_path=self.params.sraf.meef_opt_cps_path)
+        print("SRAF component created.")
         
         # 5. MEEF 优化组件 (case_meef.py / case_meef_autograd.py 依赖此).
         # self.meef = MEEF(target_mask=self.mask.data,

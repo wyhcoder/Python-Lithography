@@ -2,7 +2,7 @@
 MSAA + 中心差分 + 梯度下降版 MEEF 优化入口脚本。
 
 用法:
-    python -m examples.scalar.case_meef_autograd
+    python -m demo.scalar.case_meef_autograd
 
 核心思路:
     1. MSAA 渲染 (与原版 demo_meef.py 一致, 不用 SDF)

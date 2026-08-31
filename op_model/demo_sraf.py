@@ -612,7 +612,7 @@ class  SRAF_Optimizer:
                                 "bounds": cma_bounds,
                                 "maxfevals": maxfevals,
                                 "popsize": popsize,
-                                "tolx": 1e-3,    # 收敛容忍度
+                                "tolx": 1e-2,    # 收敛容忍度
                                 "tolfun": 1e-3,
                                 "verbose": -9,   # 关掉 cma 的内部日志
                                 "seed": 0,

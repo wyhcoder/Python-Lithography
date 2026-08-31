@@ -2,7 +2,7 @@
 # 仿真系统级参数 (Simulation System)
 # ==========================================
 
-PATTERN_NAME : &PATTERN_NAME "工字型"
+PATTERN_NAME : &PATTERN_NAME "对角通孔"
 system:
   wavelength_nm: 193.0
   pixel_size_nm: 4.0      # 默认 4nm 像素尺寸
@@ -56,7 +56,7 @@ meef:
 # ==========================================
 sraf:
   curve_type: "BS"                  # 曲线拟合类型可选: OA, BS, BZ
-  file_name: "matrix_0525"   # 用于保存结果时的文件名
+  file_name: "对角通孔"   # 用于保存结果时的文件名
   pattern_name: *PATTERN_NAME # 目标版图的名称需要与掩模板参数相对应
   sraf_orders: True      # 是否启用 SRAF 分阶
   sraf_simply: True     # 是否启用 SRAF 参数化曲线拟合,即对骨架图进行参数化

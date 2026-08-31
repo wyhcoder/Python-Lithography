@@ -6,7 +6,7 @@
 
 | 部分 | 数值框架 | 主要职责 | 入口 |
 |---|---|---|---|
-| 旧标量成像 | NumPy / SciPy | Mask、光源、光瞳、Abbe/SOCS、光刻胶 | `examples/scalar/case_*.py` |
+| 旧标量成像 | NumPy / SciPy | Mask、光源、光瞳、Abbe/SOCS、光刻胶 | `demo/scalar/case_*.py` |
 | OPC 优化层 | NumPy / SciPy / OpenCV | CTM、Level-Set、MEEF、PV-Band、SRAF | `op_model/` |
 | 独立标量 SOCS | NumPy / PyTorch | 自包含 SOCS 与批量/autograd 对照 | `scalar_socs_imaging/demo.py` |
 | 高 NA 矢量成像 | PyTorch | Jones 入射偏振、三分量电场、Vector Abbe/SOCS | `projects/vector_imaging/*.py` |
@@ -75,7 +75,7 @@ projects/vector_imaging/output/
 
 - `data/` 是输入或保留的历史数值数据，不写运行结果。
 - `outputs/` 是可重新生成的输出、缓存和日志。
-- `examples/` 只负责组装与启动，不放核心算法。
+- `demo/` 只负责组装与启动，不放核心算法。
 - `tests/` 放可判定通过/失败的检查。
 - `scripts/analysis/` 放需要人工指定历史结果路径的绘图、诊断和转换工具。
 - `docs/` 放说明与论文材料。

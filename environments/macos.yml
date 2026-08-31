@@ -22,4 +22,5 @@ dependencies:
   # PyTorch is used by the automatic-differentiation MEEF scripts.  On Apple
   # Silicon it can use the MPS backend when available.
   - pip:
+      - cma
       - torch
