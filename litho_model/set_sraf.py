@@ -1,7 +1,7 @@
 import numpy as np
 from pathlib import Path
 from skimage import draw, measure
-from utils_model.project_paths import OPC_OUTPUT_DIR, project_path
+from utils_model.project_paths import OPC_OUTPUT_DIR, case_1_result_path, project_path
 from scipy.ndimage import  binary_dilation
 from utils_model.plot_matrix import show_matrices
 from utils_model.demo_sraf_utils import distance_msaa_multi_curves,visualize_sraf_and_controls,get_b_spline_points_by_order,debug_plot_fitted_curves,classify_sraf_and_get_cps,distance_msaa_multi_skeleton,classify_sraf_byDistance,visualize_srafs_by_order,extract_sraf
@@ -333,10 +333,10 @@ class SRAF:
         # ls_mask = np.loadtxt(f'./outputs/opc/CTM和levelset图像//Ls_mask/ls_image{self.pattern_name}.txt') #0.2tr
         if self.lsmispe_epe_pvband:
         # ls_mask = np.loadtxt(f'./outputs/opc/CTM和levelset图像/Ls_mask/ls_image{self.pattern_name}切趾.txt') #0.2tr
-            ls_mask = np.loadtxt(OPC_OUTPUT_DIR / 'CTM和levelset图像' / 'Ls_mask' / f'ls_image{self.pattern_name}pe_epe_pvband无切趾.txt') #0.2tr
+            ls_mask = np.loadtxt(case_1_result_path('Ls_mask', f'ls_image{self.pattern_name}pe_epe_pvband无切趾.txt')) #0.2tr
             # ls_mask = np.loadtxt(f'./outputs/opc/CTM和levelset图像/Ls_mask/ls_image{self.pattern_name}_cpupe_epe_pvband无切趾.txt')
         else:
-            ls_mask = np.loadtxt(OPC_OUTPUT_DIR / 'CTM和levelset图像' / 'Ls_mask' / f'ls_image{self.pattern_name}切趾.txt') #0.2tr
+            ls_mask = np.loadtxt(case_1_result_path('Ls_mask', f'ls_image{self.pattern_name}切趾.txt')) #0.2tr
         _,sraf = extract_sraf(ls_mask, self.target_mask)
           
         return ls_mask, sraf

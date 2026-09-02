@@ -1,7 +1,7 @@
 import numpy as np
 from pathlib import Path
 from skimage import draw, measure
-from utils_model.project_paths import OPC_OUTPUT_DIR
+from utils_model.project_paths import OPC_OUTPUT_DIR, case_1_result_path
 from utils_model.select_eps import DemoSelectEps_new
 from scipy.ndimage import  binary_dilation
 from .load_mask_bmp import load_mask_image
@@ -107,8 +107,7 @@ class MEEF:
     # 加载LSM生成的初始掩膜和SRAF的函数，返回LSM掩模和SRAF掩模
     def _load_srafsandinitial_mask(self)-> tuple[np.ndarray, np.ndarray]:
         ls_mask = np.loadtxt(
-            OPC_OUTPUT_DIR / 'CTM和levelset图像' / 'Ls_mask'
-            / f'ls_image{self.pattern_name}.txt'
+            case_1_result_path('Ls_mask', f'ls_image{self.pattern_name}.txt')
         ) #0.2tr
         sraf = self.extract_sraf(ls_mask, self.target_mask)    
         return ls_mask, sraf    

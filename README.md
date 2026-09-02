@@ -111,7 +111,7 @@ cd ../..
 
 | 入口 | 功能 | 主要输出或注意事项 |
 |---|---|---|
-| `python -m demo.scalar.case_1` | 完整的 CTM → mask 二值化/SRAF 提取 → Level-Set 优化流程 | 结果写入 `outputs/opc/CTM和levelset图像/`，计算时间较长 |
+| `python -m demo.scalar.case_1` | 完整的 CTM → mask 二值化/SRAF 提取 → Level-Set 优化流程 | 结果写入 `outputs/opc/case_1/`，计算时间较长 |
 | `python -m demo.scalar.case_2` | 检查标量成像、PE 梯度、PV-Band、PV 梯度以及 PE+PV 联合梯度 | 会打开多幅 Matplotlib 图，主要用于算法诊断 |
 | `python -m demo.scalar.case_meef` | 旧版 MEEF 矩阵 + TSVD 控制点优化，可切换 MSAA/SDF 渲染 | 依赖旧 `simulator.meef` 数据链和历史 LSM/SRAF 输入 |
 | `python -m demo.scalar.case_meef_autograd` | 中心差分计算控制点梯度，再用 Adam/GD/L-BFGS 更新 | 超参数在入口文件顶部；支持 `xy` 和 `bisector` 方向 |

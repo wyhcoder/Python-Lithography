@@ -2,7 +2,7 @@
 # 仿真系统级参数 (Simulation System)
 # ==========================================
 
-PATTERN_NAME : &PATTERN_NAME "对角通孔"
+PATTERN_NAME : &PATTERN_NAME "工字型"
 system:
   wavelength_nm: 193.0
   pixel_size_nm: 4.0      # 默认 4nm 像素尺寸

@@ -151,7 +151,7 @@ class LevelSetOptimizer:
         initmask = self.simulator.get_current_mask_spatial()
         phi_n = reinit_SD_FMM((initmask - 0.5), self.dx, self.dy)
 
-        plot_matrix(phi_n, "Initial SDF")
+        # plot_matrix(phi_n, "Initial SDF")
         print("Initial SDF created.")
 
         self.simulator.prepare_for_optimization()
@@ -214,8 +214,8 @@ class LevelSetOptimizer:
 
             # 更新 simulator 中的 mask
             self.simulator.update_mask(temp)
-            plt.imshow(temp)
-            plt.show()
+            # plt.imshow(temp)
+            # plt.show()
             print(f"Iteration {i}/{iterations} | Temp PE Error: {new_error:.4f}")
 
 
